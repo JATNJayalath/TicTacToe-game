@@ -46,7 +46,7 @@ int main() {
 }
 
 //Initialize the board
-char** initilize_board(int n) {
+char** initialize_board(int n) {
 	int i,j;
 	char** board = (char**)malloc(n * sizeof(char*));
 	for(i=0; i<n; i++) {
@@ -60,25 +60,24 @@ char** initilize_board(int n) {
 
 //Display the board
 void display_board(char** board, int n) {
-	int row, column;
-	printf("    ");
-	for(column=0; column<n; column++) {
-		printf("  %d ", column);
-	}
-	printf("\n");
-	for(row=0; row<n; row++) {
-		printf(" %d ", row);
-		for(column=0; column<n; column++) {
-			if(board[row][column] == ' ') {
-				printf("|---");
-			}
-			else {
-				printf("| %c ", board[row][column]);
-			}
-		}
-		printf("|\n");
-	}
-	printf("\n");
+	printf("   ");
+    	for(int column=0; column<n; column++){
+        	printf("  %d ", column);
+    	}
+    	printf("\n");
+    	for(int row=0; row<n; row++) {
+        	printf(" %d ", row);
+        	for(int column=0; column<n; column++){
+            		if(board[row][column] == ' '){
+                		printf("|---");
+            		}
+            		else{
+                		printf("| %c ",board[row][column]);
+            		}
+        	}
+        	printf("|\n");
+   	 }
+    	printf("\n");
 }
 
 //Checking  validate moves
@@ -86,7 +85,7 @@ int is_valid_move(char** board, int n, int row, int column) {
 	if(row<0 || row>=n || column<0 || column>=n) {
 		return 0;
 	}
-	if(board[row][column] == ' ') {
+	if(board[row][column] != ' ') {
 		return 0;
 	}
 	return 1;
@@ -120,7 +119,7 @@ int check_win(char** board, int n, char symbol) {
 	//Chech diagonal - top right to bottom left
 	win=1;
 	for(i=0; i<n; i++) {
-		if(board[i][n-(1+i)] != symbol) {
+		if(board[i][n-1-i] != symbol) {
 			win = 0;
 			break;
 		}
@@ -168,6 +167,46 @@ void log_file(FILE* logFile, char** board, int n) {
 //1. Two Player Mode
 
 void Two_player_game(int n) {
+	char** board = initialize_board(n);
+    	FILE* logFile = fopen("game.txt", "w");
+
+    	char symbol[2] = {'X', 'O'};
+    	int turn = 0; 
+    	int row, column;
+    	int game_over = 0;
+
+    	while(!game_over) {
+        	display_board(board, n);
+        	printf("Player %c, enter your move (row column): ", symbol[turn]);
+        	scanf("%d %d", &row, &column);
+
+        	if(!is_valid_move(board, n, row, column)) {
+            		printf("Invalid move! Try again.\n");
+            		continue;
+        	}
+        	board[row][column] = symbol[turn];
+        	log_file(logFile, board, n);
+
+        	if(check_win(board, n, symbol[turn])) {
+            		display_board(board, n);
+            		printf("Player %c wins\n", symbol[turn]);
+            		game_over = 1;
+        	}
+        	else if(check_draw(board, n)) {
+            		display_board(board, n);
+            		printf("It's a draw\n");
+            		game_over = 1;
+        	}
+        	else {
+            		turn = 1-turn;
+        	}
+    	}
+
+    	fclose(logFile);
+    	for(int i=0; i<n; i++) {        
+        	free(board[i]);
+    	}
+    	free(board);
 }
 
 void User_VS_Computer_game(int n) {
