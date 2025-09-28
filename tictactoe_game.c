@@ -7,6 +7,7 @@ int is_valid_move(char** board, int n, int row, int column);
 int check_win(char** board, int n, char symbol);
 int check_draw(char** board, int n);
 void log_file(FILE* logFile, char** board, int n);
+void computer_move(char** board, int n, int *row, int *column);
 
 //Game Modes
 void Two_player_game(int n);
@@ -161,6 +162,14 @@ void log_file(FILE* logFile, char** board, int n) {
 	fprintf(logFile, "----------\n");
 }
 
+//Generate Computer moves
+void computer_move(char** board, int n, int *row, int *column) {
+	do {
+		*row = rand() % n;
+		*column = rand() % n;
+	}while(!is_valid_move(board, n, *row, *column));
+}
+
 
 //Create Game Modes
 
@@ -210,6 +219,58 @@ void Two_player_game(int n) {
 }
 
 void User_VS_Computer_game(int n) {
+	char** board = initialize_board(n);
+	FILE* logFile = fopen("game.txt", "w");
+
+	char symbol[2] = {'X', 'O'};
+	int turn = 0;
+	int row, column;
+	int game_over = 0;
+
+	while(!game_over) {
+		display_board(board, n);
+
+		if(turn == 0) {
+			printf("Enter your move(row column): ");
+			scanf("%d %d", &row, &column);
+
+			if(!is_valid_move(board, n, row, column)) {
+				printf("Invalid move! Try again.\n");
+				continue;
+			}
+		}
+		else {
+			computer_move(board, n, &row, &column);
+			printf("Computer plays at(row column): %d %d\n", row, column);
+		}
+
+		board[row][column] = symbol[turn];
+		log_file(logFile, board, n);
+
+		if(check_win(board, n, symbol[turn])) {
+			display_board(board, n);
+			if(turn == 0) {
+				printf("You win\n");
+			}
+			else {
+				printf("Computer wins\n");
+			}
+			game_over = 1;
+		}
+		else if(check_draw(board, n)) {
+			display_board(board, n);
+			printf("It's a draw\n");
+			game_over = 1;
+		}
+		else {
+			turn = 1 - turn;
+		}
+	}fclose(logFile);
+	for(int i=0; i<n; i++) {
+		free(board[i]);
+	}
+	free(board);
+
 }
 
 void Multiplayer_game(int n) {
