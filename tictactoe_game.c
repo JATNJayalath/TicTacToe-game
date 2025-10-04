@@ -3,6 +3,7 @@
 
 char** initialize_board(int n);
 void display_board(char** board, int n);
+void get_user_input(int *row, int *column, int n);
 int is_valid_move(char** board, int n, int row, int column);
 int check_win(char** board, int n, char symbol);
 int check_draw(char** board, int n);
@@ -23,15 +24,15 @@ int main() {
 	printf("Enter board size, n (3 <= n <= 10): ");
 	scanf("%d", &n);
 	if(n < 3 || n > 10) {
-		printf("Invalid board size. Please enter a valid value.\n");
-		return 0;
+		printf("Invalid board size. Please enter a value between 3 and 10.\n");
+		return 1;
 	}
 
 	printf("\n* Game Modes *");
 	printf("\n1. Two Players (User VS User)");
 	printf("\n2. User VS Computer");
 	printf("\n3. Multiplayer ");
-	printf("\nSelect fame mode: ");
+	printf("\nSelect game mode: ");
 	scanf("%d", &game_mode);
 
 	switch(game_mode) {
@@ -42,8 +43,9 @@ int main() {
 		case 3: Multiplayer_game(n);
 			break;
 		default:
-			printf("Invalid Mode. Please try again");
+			printf("Invalid Game Mode. Please try again");
 	}
+	return 0;
 }
 
 //Initialize the board
@@ -61,14 +63,15 @@ char** initialize_board(int n) {
 
 //Display the board
 void display_board(char** board, int n) {
+	int column, row;
 	printf("   ");
-    	for(int column=0; column<n; column++){
+    	for(column=0; column<n; column++){
         	printf("  %d ", column);
     	}
     	printf("\n");
-    	for(int row=0; row<n; row++) {
+    	for(row=0; row<n; row++) {
         	printf(" %d ", row);
-        	for(int column=0; column<n; column++){
+        	for(column=0; column<n; column++){
             		if(board[row][column] == ' '){
                 		printf("|---");
             		}
@@ -79,6 +82,20 @@ void display_board(char** board, int n) {
         	printf("|\n");
    	 }
     	printf("\n");
+}
+
+//Get User Input
+void get_user_input(int *row, int *column, int n) {
+	while(1) {
+		printf("Enter your move(row column): ");
+		if(scanf("%d %d", row, column) == 2 && *row>=0 && *row<n && *column>=0 && *column<n) {
+			while(getchar() != '\n');
+			break;
+		}
+		printf("Invalid Input. Please enter numbers between 0 and %d\n", n-1);
+		while(getchar() != '\n');
+	}
+
 }
 
 //Checking  validate moves
@@ -177,7 +194,11 @@ void computer_move(char** board, int n, int *row, int *column) {
 
 void Two_player_game(int n) {
 	char** board = initialize_board(n);
-    	FILE* logFile = fopen("game.txt", "a");
+    	FILE* logFile = fopen("game.txt", "w");
+	if(!logFile) {
+		printf("Couldn't open game.txt file\n");
+		return;
+	}
 
     	char symbol[2] = {'X', 'O'};
     	int turn = 0; 
@@ -186,8 +207,8 @@ void Two_player_game(int n) {
 
     	while(!game_over) {
         	display_board(board, n);
-        	printf("Player %c, enter your move (row column): ", symbol[turn]);
-        	scanf("%d %d", &row, &column);
+        	printf("Player %c,", symbol[turn]);
+        	get_user_input(&row, &column, n);
 
         	if(!is_valid_move(board, n, row, column)) {
             		printf("Invalid move! Try again.\n");
@@ -222,7 +243,11 @@ void Two_player_game(int n) {
 
 void User_VS_Computer_game(int n) {
 	char** board = initialize_board(n);
-	FILE* logFile = fopen("game.txt", "a");
+	FILE* logFile = fopen("game.txt", "w");
+	if(!logFile) {
+		printf("Couldn't open game.txt file\n");
+		return;
+	}
 
 	char symbol[2] = {'X', 'O'};
 	int turn = 0;
@@ -233,8 +258,8 @@ void User_VS_Computer_game(int n) {
 		display_board(board, n);
 
 		if(turn == 0) {
-			printf("Enter your move(row column): ");
-			scanf("%d %d", &row, &column);
+			printf("Your turn:\n");
+			get_user_input(&row, &column, n);
 
 			if(!is_valid_move(board, n, row, column)) {
 				printf("Invalid move! Try again.\n");
@@ -279,7 +304,11 @@ void User_VS_Computer_game(int n) {
 
 void Multiplayer_game(int n) {
 	char** board = initialize_board(n);
-	FILE* logFile = fopen("game.txt", "a");
+	FILE* logFile = fopen("game.txt", "w");
+	if(!logFile) {
+		printf("Couldn't open game.txt file\n");
+		return;
+	}
 
 	char symbol[3] = {'X', 'O', 'Z'};
 	int human_or_computer[3] = {0, 0, 0};      //0-human, 1-computer
@@ -300,8 +329,8 @@ void Multiplayer_game(int n) {
 
 		//human move
 		if(human_or_computer[turn] == 0) {
-			printf("Player %c, enter your move (row column): ", symbol[turn]);
-			scanf("%d %d", &row, &column);
+			printf("Player %c,", symbol[turn]);
+			get_user_input(&row, &column, n);
 
 			if(!is_valid_move(board, n, row, column)) {
 				printf("Invalid move! Try again.\n");
