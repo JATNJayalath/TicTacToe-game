@@ -1,341 +1,80 @@
-X                   
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+        
+  X     
+        
+        
 ----------
-X                   
-                    
-                    
-            O       
-                    
-                    
-                    
-                    
-                    
-                    
+        
+  X     
+        
+    O   
 ----------
-X                   
-                    
-                    
-            O       
-                    
-                    
-                    
-          Z         
-                    
-                    
+        
+  X   Z 
+        
+    O   
 ----------
-X                   
-  X                 
-                    
-            O       
-                    
-                    
-                    
-          Z         
-                    
-                    
+        
+  X   Z 
+      X 
+    O   
 ----------
-X                   
-  X                 
-                    
-          O O       
-                    
-                    
-                    
-          Z         
-                    
-                    
+        
+  X   Z 
+O     X 
+    O   
 ----------
-X                   
-  X                 
-                    
-          O O       
-                    
-                    
-    Z               
-          Z         
-                    
-                    
+    Z   
+  X   Z 
+O     X 
+    O   
 ----------
-X                   
-  X                 
-    X               
-          O O       
-                    
-                    
-    Z               
-          Z         
-                    
-                    
+    Z   
+  X   Z 
+O     X 
+    O X 
 ----------
-X                   
-  X                 
-    X               
-          O O       
-                    
-                    
-    Z               
-          Z         
-                    
-  O                 
+O   Z   
+  X   Z 
+O     X 
+    O X 
 ----------
-X                   
-  X                 
-    X         Z     
-          O O       
-                    
-                    
-    Z               
-          Z         
-                    
-  O                 
+O   Z   
+  X   Z 
+O     X 
+Z   O X 
 ----------
-X                   
-  X                 
-    X         Z     
-      X   O O       
-                    
-                    
-    Z               
-          Z         
-                    
-  O                 
+O X Z   
+  X   Z 
+O     X 
+Z   O X 
 ----------
-X                 O 
-  X                 
-    X         Z     
-      X   O O       
-                    
-                    
-    Z               
-          Z         
-                    
-  O                 
+O X Z   
+  X   Z 
+O     X 
+Z O O X 
 ----------
-X           Z     O 
-  X                 
-    X         Z     
-      X   O O       
-                    
-                    
-    Z               
-          Z         
-                    
-  O                 
+O X Z   
+  X   Z 
+O   Z X 
+Z O O X 
 ----------
-X           Z     O 
-  X                 
-    X         Z     
-      X   O O       
-        X           
-                    
-    Z               
-          Z         
-                    
-  O                 
+O X Z   
+  X   Z 
+O X Z X 
+Z O O X 
 ----------
-X           Z     O 
-  X                 
-    X       O Z     
-      X   O O       
-        X           
-                    
-    Z               
-          Z         
-                    
-  O                 
+O X Z   
+  X O Z 
+O X Z X 
+Z O O X 
 ----------
-X           Z     O 
-  X             Z   
-    X       O Z     
-      X   O O       
-        X           
-                    
-    Z               
-          Z         
-                    
-  O                 
+O X Z   
+Z X O Z 
+O X Z X 
+Z O O X 
 ----------
-X           Z     O 
-  X             Z   
-    X       O Z     
-      X   O O       
-        X           
-          X         
-    Z               
-          Z         
-                    
-  O                 
-----------
-X           Z     O 
-  X             Z   
-    X       O Z     
-      X   O O       
-        X           
-          X         
-    Z               
-          Z       O 
-                    
-  O                 
-----------
-X           Z     O 
-  X             Z   
-Z   X       O Z     
-      X   O O       
-        X           
-          X         
-    Z               
-          Z       O 
-                    
-  O                 
-----------
-X           Z     O 
-  X             Z   
-Z   X       O Z     
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z       O 
-                    
-  O                 
-----------
-X           Z     O 
-  X             Z   
-Z   X O     O Z     
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z       O 
-                    
-  O                 
-----------
-X           Z     O 
-  X             Z   
-Z   X O     O Z     
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z       O 
-                    
-  O Z               
-----------
-X           Z     O 
-  X             Z   
-Z   X O     O Z     
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-                    
-  O Z               
-----------
-X           Z     O 
-  X             Z   
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-                    
-  O Z               
-----------
-X           Z     O 
-  X             Z   
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-                    
-  O Z         Z     
-----------
-X           Z     O 
-  X             Z   
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-              X     
-  O Z         Z     
-----------
-X           Z     O 
-  X O           Z   
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-              X     
-  O Z         Z     
-----------
-X           Z     O 
-  X O           Z   
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-              X     
-  O Z Z       Z     
-----------
-X           Z     O 
-  X O           Z   
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-              X X   
-  O Z Z       Z     
-----------
-X           Z     O 
-  X O           Z O 
-Z   X O     O Z O   
-      X   O O       
-        X           
-          X         
-    Z       X       
-          Z   X   O 
-              X X   
-  O Z Z       Z     
-----------
-X           Z     O 
-  X O           Z O 
-Z   X O     O Z O   
-      X   O O       
-        X     Z     
-          X         
-    Z       X       
-          Z   X   O 
-              X X   
-  O Z Z       Z     
-----------
-X           Z     O 
-  X O           Z O 
-Z   X O     O Z O   
-      X   O O       
-        X     Z     
-          X         
-    Z       X       
-          Z   X   O 
-              X X   
-  O Z Z       Z   X 
+O X Z X 
+Z X O Z 
+O X Z X 
+Z O O X 
 ----------
